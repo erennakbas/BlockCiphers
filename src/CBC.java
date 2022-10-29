@@ -10,7 +10,6 @@ public class CBC {
         for (int i = 0 ; i < arr1.length ; i++) {
             out[i] = (byte)((arr1[i] ^ arr2[i]) & 0xff);
         }
-        System.out.println("Xor length"+out.length);
         return out;
     }
 
@@ -23,12 +22,15 @@ public class CBC {
             int offset=0;
             while(offset<plainText.length){
                 block=Arrays.copyOfRange(plainText, offset, offset+8);
-                System.out.println("block size"+block.length+" "+"iv size"+IV.length);
                 byte[] encryptedBlock = des.encrypt(XORBytes(block, IV), offset);
                 results.add(encryptedBlock);
                 IV = encryptedBlock;
                 offset+=8;
             }
+        for (byte[] b:results
+             ) {
+            System.out.println(b[0]);
+        }
             return results;
     }
     public String decrypt(String algorithm,ArrayList<byte[]> cipherArrList, byte[] key) throws Exception{

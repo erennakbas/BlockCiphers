@@ -29,8 +29,12 @@ public class Main {
 //            System.out.println(plaintextByBytes.length);
             CBC encryptionMode = new CBC();
             ArrayList<byte[]> encryptedBlocks = encryptionMode.encrypt("DES",plaintextByBytes, IOHandler.getKey(), IOHandler.getIV());
+            for (byte[] b:encryptedBlocks
+                 ) {
+                IOHandler.writeOutputFile(b);
+            }
             System.out.println(encryptionMode.decrypt("DES",encryptedBlocks, IOHandler.getKey()));
-
+            IOHandler.closeFiles();
         } catch (Exception ignored) {
             ignored.printStackTrace();
         }
