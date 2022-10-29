@@ -12,11 +12,11 @@ public class DES {
             key=new SecretKeySpec(secretKey, 0, secretKey.length, "DES");
         }
 
-    public byte[] encrypt(byte[] message, int inputOffset) throws Exception {
+    public byte[] encrypt(byte[] messageBlock, int inputOffset) throws Exception {
             encryptionCipher = Cipher.getInstance("DES/ECB/NoPadding");
             encryptionCipher.init(Cipher.ENCRYPT_MODE, key);
             System.out.println("Encryptteki input offset "+inputOffset);
-            byte[] encryptedBytes = encryptionCipher.update(message,inputOffset,8);
+            byte[] encryptedBytes = encryptionCipher.doFinal(messageBlock);
             System.out.println("Encryptteki return " + encryptedBytes.length);
             return encryptedBytes;
         }
@@ -30,6 +30,9 @@ public class DES {
         }
 
         public String encode(byte[] data) {
+            for (byte i: data) {
+                System.out.print(i + ",");
+            }
             return Base64.getEncoder().encodeToString(data);
         }
 
