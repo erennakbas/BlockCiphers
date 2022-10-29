@@ -25,8 +25,8 @@ public class Main {
         try {
             IOHandler IOHandler = new IOHandler("input.txt", "output.txt", "myLogger.log", "keyFile.txt");
             byte[] plaintextByBytes = IOHandler.readPlaintext();
-            System.out.println((int) plaintextByBytes[0]);
-            System.out.println(plaintextByBytes.length);
+//            System.out.println((int) plaintextByBytes[0]);
+//            System.out.println(plaintextByBytes.length);
             CBC encryptionMode = new CBC();
             ArrayList<byte[]> encryptedBlocks = encryptionMode.encrypt("DES",plaintextByBytes, IOHandler.getKey(), IOHandler.getIV());
             System.out.println(encryptionMode.decrypt("DES",encryptedBlocks, IOHandler.getKey()));

@@ -77,5 +77,12 @@ public class IOHandler {
         InputStream inputStream = new ByteArrayInputStream(counterVal);
         return new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
     }
+    public String encode(byte[] data) {
+        return Base64.getEncoder().encodeToString(data);
+    }
+
+    public byte[] decode(String data) {
+        return Base64.getDecoder().decode(data);
+    }
 }
 
