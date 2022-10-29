@@ -10,12 +10,14 @@ public class IOHandler {
     private byte[] initilizationVector; //getBytes
     private byte[] counterVal; //getBytes
     private Path inputPath;
+    private FileInputStream fin;
     private FileInputStream fkey;
     private FileOutputStream fout;
     private FileOutputStream flogger;
     public IOHandler(String inputFile, String outputFile, String logFile, String keyFile){
         try {
             this.inputPath = Paths.get(inputFile);
+            this.fin = new FileInputStream(inputFile);
             this.fout = new FileOutputStream(outputFile);
             this.flogger = new FileOutputStream(logFile);
             this.fkey = new FileInputStream(keyFile);

@@ -1,14 +1,16 @@
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
 
 public class Main {
     public static void main(String[] args) {
-        try {
+        /*try {
             IOHandler IOHandler = new IOHandler("input.txt", "output.txt", "myLogger.log", "keyFile.txt");
             byte[] data = IOHandler.readPlaintext();
             InputStream inputStream = new ByteArrayInputStream(data);
+            System.out.println(inputStream.readAllBytes());
             String myPlaintext = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
             System.out.println(myPlaintext);
             IOHandler.writeOutputFile(data);
@@ -19,6 +21,18 @@ public class Main {
         catch (Exception e){
             e.printStackTrace();
             System.out.println(e);
+        }*/
+        try {
+            IOHandler IOHandler = new IOHandler("input.txt", "output.txt", "myLogger.log", "keyFile.txt");
+            byte[] plaintextByBytes = IOHandler.readPlaintext();
+            System.out.println((int) plaintextByBytes[0]);
+            System.out.println(plaintextByBytes.length);
+            CBC encryptionMode = new CBC();
+            ArrayList<byte[]> encryptedBlocks = encryptionMode.encrypt("DES",plaintextByBytes, IOHandler.getKey(), IOHandler.getIV());
+            System.out.println(encryptionMode.decrypt("DES",encryptedBlocks, IOHandler.getKey()));
+
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
         }
     }
 }
