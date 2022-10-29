@@ -24,16 +24,21 @@ public class Main {
         }*/
         try {
             IOHandler IOHandler = new IOHandler("input.txt", "output.txt", "myLogger.log", "keyFile.txt");
-            byte[] plaintextByBytes = IOHandler.readPlaintext();
+            //byte[] plaintextByBytes = IOHandler.readPlaintext();
+            ArrayList<byte[]> encryptedBlocks = IOHandler.readCipherText();
 //            System.out.println((int) plaintextByBytes[0]);
 //            System.out.println(plaintextByBytes.length);
             CBC encryptionMode = new CBC();
-            ArrayList<byte[]> encryptedBlocks = encryptionMode.encrypt("DES",plaintextByBytes, IOHandler.getKey(), IOHandler.getIV());
-            for (byte[] b:encryptedBlocks
-                 ) {
-                IOHandler.writeOutputFile(b);
-            }
+//            ArrayList<byte[]> encryptedBlocks = encryptionMode.encrypt("DES",plaintextByBytes, IOHandler.getKey(), IOHandler.getIV());
             System.out.println(encryptionMode.decrypt("DES",encryptedBlocks, IOHandler.getKey()));
+//            encryptedBlocks.remove(0);
+//            for (byte[] b:encryptedBlocks) {
+//                IOHandler.writeOutputFile(b);
+//                for (byte x: b) System.out.print(x+",");
+//                for (byte x: b) System.out.print((char)x);
+//
+//            }
+
             IOHandler.closeFiles();
         } catch (Exception ignored) {
             ignored.printStackTrace();

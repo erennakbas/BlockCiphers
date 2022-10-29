@@ -14,24 +14,25 @@ public class CBC {
     }
 
     public ArrayList<byte[]> encrypt(String algorithm,byte[] plainText,byte[] key,byte[] IV) throws Exception {
-            DES des = new DES();
-            des.init(key);
-            ArrayList<byte[]> results = new ArrayList<byte[]>();
-            byte[] block = new byte[8];
-            results.add(IV);
-            int offset=0;
-            while(offset<plainText.length){
-                block=Arrays.copyOfRange(plainText, offset, offset+8);
-                byte[] encryptedBlock = des.encrypt(XORBytes(block, IV), offset);
-                results.add(encryptedBlock);
-                IV = encryptedBlock;
-                offset+=8;
-            }
-        for (byte[] b:results
-             ) {
-            System.out.println(b[0]);
+        DES des = new DES();
+        des.init(key);
+        ArrayList<byte[]> results = new ArrayList<byte[]>();
+        byte[] block = new byte[8];
+        results.add(IV);
+        int offset=0;
+        while(offset<plainText.length){
+            block=Arrays.copyOfRange(plainText, offset, offset+8);
+            byte[] encryptedBlock = des.encrypt(XORBytes(block, IV), offset);
+//            for (int i=0; i<encryptedBlock.length;i++){
+//                System.out.println(encryptedBlock[i]);
+//                if (encryptedBlock[i] < 0) encryptedBlock[i] = (byte) (encryptedBlock[i]+256);
+//                System.out.println(encryptedBlock);
+//            }
+            results.add(encryptedBlock);
+            IV = encryptedBlock;
+            offset+=8;
         }
-            return results;
+        return results;
     }
     public String decrypt(String algorithm,ArrayList<byte[]> cipherArrList, byte[] key) throws Exception{
         DES des = new DES();
@@ -46,6 +47,4 @@ public class CBC {
             results.add(0,decryptedPlainBlock);
         }
         return String.join("", results);
-    }
-
-}
+    }}

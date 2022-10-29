@@ -1,9 +1,12 @@
+import javax.crypto.CipherOutputStream;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 public class IOHandler {
     private byte[] key; //getBytes
@@ -12,13 +15,13 @@ public class IOHandler {
     private Path inputPath;
     private FileInputStream fin;
     private FileInputStream fkey;
-    private FileOutputStream fout;
+    private FileWriter fout;
     private FileOutputStream flogger;
     public IOHandler(String inputFile, String outputFile, String logFile, String keyFile){
         try {
             this.inputPath = Paths.get(inputFile);
             this.fin = new FileInputStream(inputFile);
-            this.fout = new FileOutputStream(outputFile);
+            this.fout = new FileWriter(outputFile);
             this.flogger = new FileOutputStream(logFile);
             this.fkey = new FileInputStream(keyFile);
             this.readKeyFile();
@@ -46,8 +49,33 @@ public class IOHandler {
     public byte[] readPlaintext() throws IOException{
         return Files.readAllBytes(inputPath);
     }
+    public ArrayList<byte[]> readCipherText() throws IOException{
+        String string = Files.readString(this.inputPath);
+        char[] chars = string.toCharArray();
+        byte[] bytes = new byte[chars.length];
+        for (int i=0; i<chars.length; i++){
+            bytes[i] = (byte) chars[i];
+        }
+        ArrayList<byte[]> cipherBlocks = new ArrayList<byte[]>();
+        cipherBlocks.add(getIV());
+        byte[] block = new byte[8];
+        int k=0;
+        for (int i=0; i<string.length(); i+=8){
+            k=0;
+            for (int j=i; j<i+8; j++){
+                if (j == string.length()) break;
+                block[k] = bytes[j];
+                if (block[k]>=65408) block[k]-=65536;
+                k++;
+            }
+            cipherBlocks.add(block);
+        }
+        return cipherBlocks;
+    }
     public void writeOutputFile(byte[] data) throws IOException{
-        fout.write(data);
+        StringBuilder s = new StringBuilder();
+        for (byte b: data) s.append((char)b);
+        fout.write(s.toString());
     }
     public void closeFiles() throws IOException{
         fout.close();
