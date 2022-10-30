@@ -4,21 +4,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class CBC {
-    public static byte[] XORBytes(byte[] arr1, byte[] arr2) {
-        byte[] out = new byte[arr1.length];
-        for (int i = 0 ; i < arr1.length ; i++) {
-            out[i] = (byte)((arr1[i] ^ arr2[i]) & 0xff);
-        }
-        return out;
-    }
-
+public class CBC extends Mode{
+    @Override
     public ArrayList<byte[]> encrypt(String algorithm,byte[] plainText,byte[] key,byte[] IV) throws Exception {
         DES des = new DES();
         des.init(key);
         ArrayList<byte[]> results = new ArrayList<byte[]>();
         byte[] block = new byte[8];
-        results.add(IV);
         int offset=0;
         while(offset<plainText.length){
             block=Arrays.copyOfRange(plainText, offset, offset+8);
@@ -28,14 +20,19 @@ public class CBC {
 //                if (encryptedBlock[i] < 0) encryptedBlock[i] = (byte) (encryptedBlock[i]+256);
 //                System.out.println(encryptedBlock);
 //            }
+            for (byte b: encryptedBlock) {
+                System.out.print(b+",");
+            }
             results.add(encryptedBlock);
             IV = encryptedBlock;
             offset+=8;
         }
         return results;
     }
-    public String decrypt(String algorithm,ArrayList<byte[]> cipherArrList, byte[] key) throws Exception{
+    @Override
+    public String decrypt(String algorithm,ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception{
         DES des = new DES();
+        cipherArrList.add(0, IV);
         des.init(key);
         byte[] Ci = new byte[8];
         byte[] block = new byte[8];

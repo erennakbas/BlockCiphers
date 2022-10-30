@@ -24,13 +24,50 @@ public class Main {
         }*/
         try {
             IOHandler IOHandler = new IOHandler("input.txt", "output.txt", "myLogger.log", "keyFile.txt");
-            //byte[] plaintextByBytes = IOHandler.readPlaintext();
-            ArrayList<byte[]> encryptedBlocks = IOHandler.readCipherText();
+            String encryptionType = "test";
+            String encryptionMode = "cbc";
+            Mode mode;
+            switch (encryptionMode) {
+                case "cbc":
+                    mode = new CBC();
+                    break;
+                case "ofb":
+                    mode = new CBC();
+                    break;
+                case "cfb":
+                    mode = new CBC();
+                    break;
+                case "ctr":
+                    mode = new CBC();
+                    break;
+                default:
+                    mode = new CBC();
+
+            }
+
+            if (encryptionType.equals("dec")){
+                ArrayList<byte[]> encryptedBlocks = IOHandler.readCipherText();
+                String plaintext = mode.decrypt("DES",encryptedBlocks, IOHandler.getKey(), IOHandler.getIV());
+                IOHandler.writeOutputFile(plaintext);
+            }
+            else if (encryptionType.equals("test")){
+                byte[] plaintextByBytes = IOHandler.readPlaintext();
+                ArrayList<byte[]> encryptedBlocks = mode.encrypt("DES",plaintextByBytes, IOHandler.getKey(), IOHandler.getIV());
+                String plaintext = mode.decrypt("DES",encryptedBlocks, IOHandler.getKey(), IOHandler.getIV());
+                System.out.println(plaintext);
+            }
+            else{
+                byte[] plaintextByBytes = IOHandler.readPlaintext();
+                ArrayList<byte[]> encryptedBlocks = mode.encrypt("DES",plaintextByBytes, IOHandler.getKey(), IOHandler.getIV());
+                IOHandler.writeOutputFile(encryptedBlocks);
+
+            }
+            //;
+
 //            System.out.println((int) plaintextByBytes[0]);
 //            System.out.println(plaintextByBytes.length);
-            CBC encryptionMode = new CBC();
+
 //            ArrayList<byte[]> encryptedBlocks = encryptionMode.encrypt("DES",plaintextByBytes, IOHandler.getKey(), IOHandler.getIV());
-            System.out.println(encryptionMode.decrypt("DES",encryptedBlocks, IOHandler.getKey()));
 //            encryptedBlocks.remove(0);
 //            for (byte[] b:encryptedBlocks) {
 //                IOHandler.writeOutputFile(b);

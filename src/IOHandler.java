@@ -57,7 +57,6 @@ public class IOHandler {
             bytes[i] = (byte) chars[i];
         }
         ArrayList<byte[]> cipherBlocks = new ArrayList<byte[]>();
-        cipherBlocks.add(getIV());
         byte[] block = new byte[8];
         int k=0;
         for (int i=0; i<string.length(); i+=8){
@@ -66,17 +65,34 @@ public class IOHandler {
                 if (j == string.length()) break;
                 block[k] = bytes[j];
                 if (block[k]>=65408) block[k]-=65536;
+                System.out.print(block[k]+",");
+
                 k++;
             }
+            System.out.print('/');
             cipherBlocks.add(block);
         }
+        System.out.println();
         return cipherBlocks;
     }
-    public void writeOutputFile(byte[] data) throws IOException{
-        StringBuilder s = new StringBuilder();
-        for (byte b: data) s.append((char)b);
-        fout.write(s.toString());
+    public void writeOutputFile(ArrayList<byte[]> encryptedBlocks ) throws IOException{
+        for (byte[] block:encryptedBlocks) {
+            StringBuilder s = new StringBuilder();
+            for (byte b: block) s.append((char)b);
+//            fout.write(new String(block, StandardCharsets.UTF_8));
+            fout.write(s.toString());
+        }
+        }
+
+    public void writeOutputFile(String decryptedPlaintext) throws IOException{
+        System.out.println(decryptedPlaintext);
+        fout.write(decryptedPlaintext);
     }
+    //                for (byte x: b) System.out.print(x+",");
+//                for (byte x: b) System.out.print((char)x);
+//
+//
+
     public void closeFiles() throws IOException{
         fout.close();
         flogger.close();
