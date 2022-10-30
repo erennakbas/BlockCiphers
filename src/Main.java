@@ -4,7 +4,7 @@ public class Main {
         try {
             IOHandler IOHandler = new IOHandler("input.txt", "output.txt", "myLogger.log", "keyFile.txt");
             String encryptionType = "dec";
-            String encryptionMode = "ofb";
+            String encryptionMode = "test";
             Mode mode;
             switch (encryptionMode) {
                 case "cbc":
@@ -22,7 +22,7 @@ public class Main {
                     mode = new CFB();
                     break;
                 case "ctr":
-                    mode = new CTR();
+                    mode = new CTR(IOHandler.readPlaintext(), IOHandler.getKey(), IOHandler.getCounterVal());
                     break;
                 default:
                     mode = new CBC();

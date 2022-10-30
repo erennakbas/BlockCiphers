@@ -7,7 +7,6 @@ public class OFB extends Mode{
         preEncryptedBlocks= new ArrayList<byte[]>();
         DES des = new DES();
         des.init(key);
-        byte[] block = new byte[8];
         int offset=0;
         while(offset<input.length){
             byte[] encryptedBlock = des.encrypt(IV);
@@ -20,7 +19,6 @@ public class OFB extends Mode{
         preEncryptedBlocks= new ArrayList<byte[]>();
         DES des = new DES();
         des.init(key);
-        byte[] block = new byte[8];
         int counter=0;
         while(counter<input.size()){
             byte[] encryptedBlock = des.encrypt(IV);
