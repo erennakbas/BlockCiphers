@@ -24,7 +24,7 @@ public class Main {
         }*/
         try {
             IOHandler IOHandler = new IOHandler("input.txt", "output.txt", "myLogger.log", "keyFile.txt");
-            String encryptionType = "test";
+            String encryptionType = "dec";
             String encryptionMode = "cbc";
             Mode mode;
             switch (encryptionMode) {

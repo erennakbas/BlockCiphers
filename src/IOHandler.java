@@ -52,10 +52,13 @@ public class IOHandler {
     public ArrayList<byte[]> readCipherText() throws IOException{
         String string = Files.readString(this.inputPath);
         char[] chars = string.toCharArray();
-        byte[] bytes = new byte[chars.length];
-        for (int i=0; i<chars.length; i++){
-            bytes[i] = (byte) chars[i];
+        int toAdd=   8 - (chars.length % 8);
+        byte[] bytes = new byte[chars.length+toAdd];
+        int x=0;
+        for (x=0; x<chars.length; x++){
+            bytes[x] = (byte) chars[x];
         }
+        for (x=x; x<bytes.length; x++) bytes[x] =0;
         ArrayList<byte[]> cipherBlocks = new ArrayList<byte[]>();
         byte[] block = new byte[8];
         int k=0;
