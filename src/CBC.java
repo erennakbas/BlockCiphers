@@ -1,6 +1,3 @@
-import javax.crypto.Cipher;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -34,6 +31,13 @@ public class CBC extends Mode{
         DES des = new DES();
         cipherArrList.add(0, IV);
         des.init(key);
+        System.out.println("Cipher Arr List elemanları:");
+        for (byte[] asd: cipherArrList){
+            for (byte z: asd){
+                System.out.print(z+",");
+            }
+            System.out.print("/");
+        }
         byte[] Ci = new byte[8];
         byte[] block = new byte[8];
         ArrayList<String> results = new ArrayList<String>();
