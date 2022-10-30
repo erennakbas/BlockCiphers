@@ -13,7 +13,7 @@ public class DES {
         key=new SecretKeySpec(secretKey, 0, secretKey.length, "DES");
     }
 
-    public byte[] encrypt(byte[] messageBlock, int inputOffset) throws Exception {
+    public byte[] encrypt(byte[] messageBlock) throws Exception {
         encryptionCipher = Cipher.getInstance("DES/ECB/NoPadding");
         encryptionCipher.init(Cipher.ENCRYPT_MODE, key);
         byte[] encryptedBytes = encryptionCipher.update(messageBlock);
@@ -46,8 +46,7 @@ public class DES {
 //            System.out.print(i +",");
 //        }
 //        System.out.println("----");
-        String utf8String = new String(data, StandardCharsets.UTF_8);
-        return utf8String;
+        return new String(data, StandardCharsets.UTF_8);
 //        return builder.toString();
     }
 

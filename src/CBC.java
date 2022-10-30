@@ -11,7 +11,7 @@ public class CBC extends Mode{
         int offset=0;
         while(offset<plainText.length){
             block=Arrays.copyOfRange(plainText, offset, offset+8);
-            byte[] encryptedBlock = des.encrypt(XORBytes(block, IV), offset);
+            byte[] encryptedBlock = des.encrypt(XORBytes(block, IV));//byte[] encryptedBlock = des.encrypt(XORBytes(block, IV), offset);
 //            for (int i=0; i<encryptedBlock.length;i++){
 //                System.out.println(encryptedBlock[i]);
 //                if (encryptedBlock[i] < 0) encryptedBlock[i] = (byte) (encryptedBlock[i]+256);
