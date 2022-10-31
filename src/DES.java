@@ -7,14 +7,16 @@ import java.util.Base64;
 public class DES {
     private SecretKey key;
     private final int KEY_SIZE = 64;
+    private String algorithm;
     private Cipher encryptionCipher;
 
-    public void init(byte[] secretKey) throws Exception {
-        key=new SecretKeySpec(secretKey, 0, secretKey.length, "DES");
+    public void init(byte[] secretKey, String algorithm) throws Exception {
+        this.algorithm = algorithm;
+        key=new SecretKeySpec(secretKey, 0, secretKey.length, algorithm);
     }
 
     public byte[] encrypt(byte[] messageBlock) throws Exception {
-        encryptionCipher = Cipher.getInstance("DES/ECB/NoPadding");
+        encryptionCipher = Cipher.getInstance(this.algorithm+"/ECB/NoPadding");
         encryptionCipher.init(Cipher.ENCRYPT_MODE, key);
         byte[] encryptedBytes = encryptionCipher.update(messageBlock);
         return encryptedBytes;
@@ -25,7 +27,7 @@ public class DES {
 //        System.out.println("Decrypt edilecek byte değerleri:");
 //        for (byte b: encryptedBlock) System.out.print(b+",");
 //        System.out.println();
-        Cipher decryptionCipher = Cipher.getInstance("DES/ECB/NoPadding");
+        Cipher decryptionCipher = Cipher.getInstance(this.algorithm+"/ECB/NoPadding");
         decryptionCipher.init(Cipher.DECRYPT_MODE, key);
         byte[] decryptedBytes = decryptionCipher.update(encryptedBlock);
 //        System.out.println("Decrypt edilince byte değerleri:");

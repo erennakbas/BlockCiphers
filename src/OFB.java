@@ -3,10 +3,13 @@ import java.util.Arrays;
 
 public class OFB extends Mode{
     public ArrayList<byte[]> preEncryptedBlocks;
-    public OFB(byte[] input, byte[] key, byte[] IV)throws Exception{
+    public OFB(String algorithm){
+        super(algorithm);
+    }
+    public void preEncrypt(byte[] input, byte[] key, byte[] IV)throws Exception{
         preEncryptedBlocks= new ArrayList<byte[]>();
         DES des = new DES();
-        des.init(key);
+        des.init(key, this.algorithm);
         int offset=0;
         while(offset<input.length){
             byte[] encryptedBlock = des.encrypt(IV);
@@ -15,10 +18,10 @@ public class OFB extends Mode{
             offset+=8;
         }
     }
-    public OFB(ArrayList<byte[]> input, byte[] key, byte[] IV)throws Exception{
+    public void preEncrypt(ArrayList<byte[]> input, byte[] key, byte[] IV)throws Exception{
         preEncryptedBlocks= new ArrayList<byte[]>();
         DES des = new DES();
-        des.init(key);
+        des.init(key, this.algorithm);
         int counter=0;
         while(counter<input.size()){
             byte[] encryptedBlock = des.encrypt(IV);
@@ -29,7 +32,8 @@ public class OFB extends Mode{
     }
 
     @Override
-    public ArrayList<byte[]> encrypt(String algorithm, byte[] plainText, byte[] key, byte[] IV) throws Exception {
+    public ArrayList<byte[]> encrypt(byte[] plainText, byte[] key, byte[] IV) throws Exception {
+        this.preEncrypt(plainText, key, IV);
         ArrayList<byte[]> results = new ArrayList<byte[]>();
         byte[] block = new byte[8];
         int offset=0;
@@ -37,20 +41,21 @@ public class OFB extends Mode{
         while(offset<plainText.length){
             block= Arrays.copyOfRange(plainText, offset, offset+8);
             byte[] encryptedBlock=preEncryptedBlocks.get(counter);
-            byte[] finalEncriptedBlock = XORBytes(encryptedBlock, block);
-            for (byte b: finalEncriptedBlock) {
+            byte[] finalEncryptedBlock = XORBytes(encryptedBlock, block);
+            for (byte b: finalEncryptedBlock) {
                 System.out.print(b+",");
             }
-            results.add(finalEncriptedBlock);
+            results.add(finalEncryptedBlock);
             offset+=8;
             counter+=1;
         }
         return results;
     }
     @Override
-    public String decrypt(String algorithm,ArrayList<byte[]> cipherArrList, byte[] key,byte[] IV) throws Exception{
+    public String decrypt(ArrayList<byte[]> cipherArrList, byte[] key,byte[] IV) throws Exception{
+        this.preEncrypt(cipherArrList, key, IV);
         DES des = new DES();
-        des.init(key);
+        des.init(key, this.algorithm);
         System.out.println("Cipher Arr List elemanları:");
         for (byte[] asd: cipherArrList){
             for (byte z: asd){

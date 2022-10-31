@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="467f7aa0-2bed-4457-ad27-5fa7cb0374e3" name="Changes" comment="ofb done">
+    <list default="true" id="467f7aa0-2bed-4457-ad27-5fa7cb0374e3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CBC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CFB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CFB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CTR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CTR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DES.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DES.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Mode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Mode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OFB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OFB.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,6 +36,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ahmet\Desktop\assignment\DES" />
@@ -76,6 +84,7 @@
       <workItem from="1667076661993" duration="3571000" />
       <workItem from="1667120992791" duration="9222000" />
       <workItem from="1667130499334" duration="9924000" />
+      <workItem from="1667210002741" duration="2908000" />
     </task>
     <task id="LOCAL-00001" summary="Filehandler">
       <created>1666970497224</created>

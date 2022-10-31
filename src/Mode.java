@@ -1,7 +1,14 @@
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public abstract class Mode {
+    String algorithm;
+    public Mode(String algorithm){
+        this.algorithm = algorithm;
+    }
+    public Mode(){
+        this.algorithm = "DES";
+    }
+
     public byte[] XORBytes(byte[] arr1, byte[] arr2) {
         byte[] out = new byte[arr1.length];
         for (int i = 0 ; i < arr1.length ; i++) {
@@ -14,6 +21,6 @@ public abstract class Mode {
         System.out.println("/");
         return out;
     }
-    public abstract ArrayList<byte[]> encrypt(String algorithm, byte[] plainText, byte[] key, byte[] IV) throws Exception;
-    public abstract String decrypt(String algorithm,ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception;
+    public abstract ArrayList<byte[]> encrypt(byte[] plainText, byte[] key, byte[] IV) throws Exception;
+    public abstract String decrypt(ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception;
 }

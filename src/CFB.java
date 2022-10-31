@@ -3,10 +3,12 @@ import java.util.Arrays;
 
 public class CFB extends Mode{
 
-    @Override
-    public ArrayList<byte[]> encrypt(String algorithm, byte[] plainText, byte[] key, byte[] IV) throws Exception {
+    public CFB(String algorithm){
+        super(algorithm);
+    }
+    public ArrayList<byte[]> encrypt( byte[] plainText, byte[] key, byte[] IV) throws Exception {
         DES des = new DES();
-        des.init(key);
+        des.init(key, this.algorithm);
         ArrayList<byte[]> results = new ArrayList<byte[]>();
         byte[] block;
         int offset=0;
@@ -23,10 +25,9 @@ public class CFB extends Mode{
         }
         return results;
     }
-    @Override
-    public String decrypt(String algorithm,ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception{
+    public String decrypt(ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception{
         DES des = new DES();
-        des.init(key);
+        des.init(key, this.algorithm);
         cipherArrList.add(0, IV);
 
         System.out.println("Cipher Arr List elemanları:");

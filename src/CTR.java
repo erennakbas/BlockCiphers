@@ -2,11 +2,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CTR extends Mode{
-    public ArrayList<byte[]> preEncryptedBlocks;
+    public ArrayList<byte[]> preEncryptedBlocks = new ArrayList<>();
 
-    public CTR(byte[] plainText, byte[] key, byte[] counter) throws Exception{
+    public CTR(String algorithm, byte[] plainText, byte[] key, byte[] counter) throws Exception{
+        super(algorithm);
         DES des = new DES();
-        des.init(key);
+        des.init(key, this.algorithm);
         int offset=0;
         byte[] block = new byte[8];
         while(offset<plainText.length){
@@ -47,9 +48,9 @@ public class CTR extends Mode{
         return bl;
     }
     @Override
-    public ArrayList<byte[]> encrypt(String algorithm, byte[] plainText, byte[] key, byte[] IV) throws Exception {
+    public ArrayList<byte[]> encrypt(byte[] plainText, byte[] key, byte[] IV) throws Exception {
         DES des = new DES();
-        des.init(key);
+        des.init(key, this.algorithm);
         ArrayList<byte[]> results = new ArrayList<byte[]>();
         byte[] block = new byte[8];
 
@@ -60,16 +61,16 @@ public class CTR extends Mode{
         return results;
     }
     @Override
-    public String decrypt(String algorithm,ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception{
+    public String decrypt(ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception{
         DES des = new DES();
-        des.init(key);
-        System.out.println("Cipher Arr List elemanları:");
-        for (byte[] asd: cipherArrList){
-            for (byte z: asd){
-                System.out.print(z+",");
-            }
-            System.out.print("/");
-        }
+        des.init(key, this.algorithm);
+//        System.out.println("Cipher Arr List elemanları:");
+//        for (byte[] asd: cipherArrList){
+//            for (byte z: asd){
+//                System.out.print(z+",");
+//            }
+//            System.out.print("/");
+//        }
         byte[] Ci = new byte[8];
         byte[] block = new byte[8];
         ArrayList<String> results = new ArrayList<String>();

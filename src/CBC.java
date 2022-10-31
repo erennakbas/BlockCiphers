@@ -2,10 +2,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CBC extends Mode{
+    public CBC(String algorithm){
+        super(algorithm);
+    }
     @Override
-    public ArrayList<byte[]> encrypt(String algorithm,byte[] plainText,byte[] key,byte[] IV) throws Exception {
+    public ArrayList<byte[]> encrypt(byte[] plainText,byte[] key,byte[] IV) throws Exception {
         DES des = new DES();
-        des.init(key);
+        des.init(key, this.algorithm);
         ArrayList<byte[]> results = new ArrayList<byte[]>();
         byte[] block = new byte[8];
         int offset=0;
@@ -27,10 +30,10 @@ public class CBC extends Mode{
         return results;
     }
     @Override
-    public String decrypt(String algorithm,ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception{
+    public String decrypt(ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception{
         DES des = new DES();
         cipherArrList.add(0, IV);
-        des.init(key);
+        des.init(key, this.algorithm);
         System.out.println("Cipher Arr List elemanları:");
         for (byte[] asd: cipherArrList){
             for (byte z: asd){
