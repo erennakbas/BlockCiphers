@@ -45,7 +45,7 @@ public class IOHandler {
         return Files.readAllBytes(this.inputPath);
     }
     public ArrayList<byte[]> readCipherText() throws IOException{
-        String string = Files.readString(this.inputPath);
+        String string = String.join("",Files.readAllLines(inputPath));
         byte[] bytes = Base64.getDecoder().decode(string);
         ArrayList<byte[]> cipherBlocks = new ArrayList<byte[]>();
         byte[] block;
