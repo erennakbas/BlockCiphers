@@ -4,9 +4,9 @@ public class Main {
         try {
             IOHandler IOHandler = new IOHandler("input.txt", "output.txt", "myLogger.log", "keyFile.txt");
             String enOrDecrypt = "DEC";
-            String encryptionType = "DES";
+            String encryptionType = "3DES";
             if (encryptionType.equals("3DES")) encryptionType="TripleDES";
-            String encryptionMode = "CTR";
+            String encryptionMode = "OFB";
             Mode mode;
             switch (encryptionMode) {
                 case "CBC":

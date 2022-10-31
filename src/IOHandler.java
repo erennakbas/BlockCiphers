@@ -50,23 +50,16 @@ public class IOHandler {
     }
     public ArrayList<byte[]> readCipherText() throws IOException{
         String string = Files.readString(this.inputPath);
-        char[] chars = string.toCharArray();
-        byte[] bytes = new byte[chars.length];
-        int x=0;
-        System.out.println("Saçmalık");
-        for (x=0; x<chars.length; x++){
-            bytes[x] = (byte) chars[x];
-            System.out.print(bytes[x]+",");
-        }
-        System.out.println();
+        string = string.trim();
+        byte[] bytes = Base64.getDecoder().decode(string);
         ArrayList<byte[]> cipherBlocks = new ArrayList<byte[]>();
         byte[] block = new byte[8];
         int k=0;
-        for (int i=0; i<string.length(); i+=8){
+        for (int i=0; i<bytes.length; i+=8){
             k=0;
             block = new byte[8];
             for (int j=i; j<i+8; j++){
-                if (j == string.length()) break;
+                if (j == bytes.length) break;
                 block[k] = bytes[j];
                 System.out.print(block[k]+",");
 //                if (block[k]>=65408) {
@@ -91,14 +84,15 @@ public class IOHandler {
     public void writeOutputFile(ArrayList<byte[]> encryptedBlocks ) throws IOException{
         System.out.println("OUTPUT DOSYASINA YAZDIĞIM DEĞERLER");
         for (byte[] block:encryptedBlocks) {
-            StringBuilder s = new StringBuilder();
-            for (byte b: block) {
-//                System.out.print(b+",");
-                s.append((char)b);
-            }
+//            StringBuilder s = new StringBuilder();
+//            for (byte b: block) {
+////                System.out.print(b+",");
+//                s.append((char)b);
+//            }
+
 //            System.out.print("/");
 //            fout.write(new String(block, StandardCharsets.UTF_8));
-            fout.write(s.toString());
+            fout.write(Base64.getMimeEncoder().encodeToString(block));
         }
         }
 
