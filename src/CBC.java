@@ -30,7 +30,7 @@ public class CBC extends Mode{
         return results;
     }
     @Override
-    public String decrypt(ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception{
+    public ArrayList<byte[]> decrypt(ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception{
         DES des = new DES();
         cipherArrList.add(0, IV);
         des.init(key, this.algorithm);
@@ -43,12 +43,12 @@ public class CBC extends Mode{
         }
         byte[] Ci = new byte[8];
         byte[] block = new byte[8];
-        ArrayList<String> results = new ArrayList<String>();
+        ArrayList<byte[]> results = new ArrayList<byte[]>();
         for (int i=cipherArrList.size()-1; i>=1; i--){
             Ci = cipherArrList.get(i);
             block = des.decrypt(Ci);
-            String decryptedPlainBlock= des.encode(XORBytes(block, cipherArrList.get(i-1)));
-            results.add(0,decryptedPlainBlock);
+            byte[] decryptedBlock= XORBytes(block, cipherArrList.get(i-1));
+            results.add(0,decryptedBlock);
         }
-        return String.join("", results);
+        return results;
     }}

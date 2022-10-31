@@ -22,5 +22,5 @@ public abstract class Mode {
         return out;
     }
     public abstract ArrayList<byte[]> encrypt(byte[] plainText, byte[] key, byte[] IV) throws Exception;
-    public abstract String decrypt(ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception;
+    public abstract ArrayList<byte[]> decrypt(ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception;
 }
