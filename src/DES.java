@@ -6,12 +6,20 @@ import java.util.Base64;
 
 public class DES {
     private SecretKey key;
-    private final int KEY_SIZE = 64;
     private String algorithm;
     private Cipher encryptionCipher;
 
     public void init(byte[] secretKey, String algorithm) throws Exception {
         this.algorithm = algorithm;
+        if (algorithm.equals("TripleDES")){
+            byte[] newSecretKey = new byte[24];
+            for (int i=1; i<=3; i++){
+                for (int j=0; j<8; j++){
+                    newSecretKey[j*i] = secretKey[i];
+                }
+            }
+            secretKey = newSecretKey;
+        }
         key=new SecretKeySpec(secretKey, 0, secretKey.length, algorithm);
     }
 
@@ -48,7 +56,7 @@ public class DES {
 //            System.out.print(i +",");
 //        }
 //        System.out.println("----");
-        return new String(data, StandardCharsets.UTF_8);
+        return Base64.getMimeEncoder().encodeToString(data);
 //        return builder.toString();
     }
 
