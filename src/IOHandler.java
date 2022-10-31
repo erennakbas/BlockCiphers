@@ -14,11 +14,11 @@ public class IOHandler {
     private FileInputStream fkey;
     private FileWriter fout;
     private FileOutputStream flogger;
-    public IOHandler(String inputFile, String outputFile, String logFile, String keyFile){
+    public IOHandler(String inputFile, String outputFile, String keyFile){
         try {
             this.inputPath = Paths.get(inputFile);
             this.fout = new FileWriter(outputFile);
-            this.flogger = new FileOutputStream(logFile);
+            this.flogger = new FileOutputStream("run.log", true);
             this.fkey = new FileInputStream(keyFile);
             this.readKeyFile();
 

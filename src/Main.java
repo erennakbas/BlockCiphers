@@ -1,12 +1,14 @@
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         try {
-            IOHandler IOHandler = new IOHandler("input.txt", "output.txt", "myLogger.log", "keyFile.txt");
-            String enOrDecrypt = "DEC";
-            String encryptionType = "3DES";
+            IOHandler IOHandler = new IOHandler(args[2], args[4], args[7]);
+            String enOrDecrypt = args[0];
+            String encryptionType = args[5];
             if (encryptionType.equals("3DES")) encryptionType="TripleDES";
-            String encryptionMode = "CTR";
+            String encryptionMode = args[6];
             Mode mode;
             switch (encryptionMode) {
                 case "CBC":
@@ -24,9 +26,8 @@ public class Main {
                 default:
                     mode = new CBC(encryptionType);
             }
-
-
-            if (enOrDecrypt.equals("DEC")){
+            Instant starts = Instant.now();
+            if (enOrDecrypt.equals("-d")){
                 ArrayList<byte[]> encryptedBlocks = IOHandler.readCipherText();
                 ArrayList<byte[]> plainBlocks= mode.decrypt(encryptedBlocks, IOHandler.getKey(), IOHandler.getIV());
                 IOHandler.writeDecrypted(plainBlocks);
@@ -35,9 +36,11 @@ public class Main {
                 byte[] plaintextByBytes = IOHandler.readPlaintext();
                 ArrayList<byte[]> encryptedBlocks = mode.encrypt(plaintextByBytes, IOHandler.getKey(), IOHandler.getIV());
                 IOHandler.writeEncrypted(encryptedBlocks);
-
             }
-
+            Instant ends = Instant.now();
+            long millis = Duration.between(starts, ends).toMillis();
+            String log="input.txt "+"output.txt "+enOrDecrypt+" "+encryptionType+" "+encryptionMode+" "+millis+"\n";
+            IOHandler.writeLogFile(log);
             IOHandler.closeFiles();
         } catch (Exception ignored) {
             ignored.printStackTrace();
