@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="467f7aa0-2bed-4457-ad27-5fa7cb0374e3" name="Changes" comment="3DES Implemented.">
+    <list default="true" id="467f7aa0-2bed-4457-ad27-5fa7cb0374e3" name="Changes" comment="Kod temize çekildi, testler yapıldı.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CBC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CFB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CFB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CTR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CTR.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DES.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DES.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IOHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IOHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Mode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Mode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OFB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OFB.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +172,21 @@
       <option name="project" value="LOCAL" />
       <updated>1667217477816</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Base64 yapıldı. Test edilecek, log yazılacak.">
+      <created>1667245383552</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1667245383552</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Kod temize çekildi, testler yapıldı.">
+      <created>1667249485821</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1667249485821</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -200,7 +209,9 @@
     <MESSAGE value="ofb done" />
     <MESSAGE value="some refactoring of the code" />
     <MESSAGE value="3DES Implemented." />
-    <option name="LAST_COMMIT_MESSAGE" value="3DES Implemented." />
+    <MESSAGE value="Base64 yapıldı. Test edilecek, log yazılacak." />
+    <MESSAGE value="Kod temize çekildi, testler yapıldı." />
+    <option name="LAST_COMMIT_MESSAGE" value="Kod temize çekildi, testler yapıldı." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

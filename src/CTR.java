@@ -9,22 +9,17 @@ public class CTR extends Mode{
         DES des = new DES();
         des.init(key, this.algorithm);
         int offset=0;
-        byte[] block = new byte[8];
         while(offset<plainText.length){
-            block= Arrays.copyOfRange(plainText, offset, offset+8);
-            long lng =byteToLOng(counter);
-            lng =lng++;
+            long lng =byteToLong(counter);
+            lng++;
             byte[] bl =longToByte(lng);
             counter=bl;
             byte[] encryptedBlock = des.encrypt(counter);
-            for (byte b: encryptedBlock) {
-                System.out.print(b+",");
-            }
             preEncryptedBlocks.add(encryptedBlock);
             offset+=8;
         }
     }
-    public long byteToLOng(byte[] IV){
+    public long byteToLong(byte[] IV){
         long lng = ((long) IV[7] << 56)
                 | ((long) IV[6] & 0xff) << 48
                 | ((long) IV[5] & 0xff) << 40
@@ -52,8 +47,6 @@ public class CTR extends Mode{
         DES des = new DES();
         des.init(key, this.algorithm);
         ArrayList<byte[]> results = new ArrayList<byte[]>();
-        byte[] block = new byte[8];
-
         for (int i=0;i<preEncryptedBlocks.size();i++) {
             byte[] result = XORBytes(Arrays.copyOfRange(plainText, i*8, i*8+8), preEncryptedBlocks.get(i));
             results.add(result);
@@ -64,15 +57,8 @@ public class CTR extends Mode{
     public ArrayList<byte[]> decrypt(ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception{
         DES des = new DES();
         des.init(key, this.algorithm);
-//        System.out.println("Cipher Arr List elemanları:");
-//        for (byte[] asd: cipherArrList){
-//            for (byte z: asd){
-//                System.out.print(z+",");
-//            }
-//            System.out.print("/");
-//        }
-        byte[] Ci = new byte[8];
-        byte[] block = new byte[8];
+        byte[] Ci;
+        byte[] block;
         ArrayList<byte[]> results = new ArrayList<byte[]>();
         for (int i=0; i<cipherArrList.size(); i++){
             Ci = cipherArrList.get(i);

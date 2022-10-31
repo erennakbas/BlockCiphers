@@ -5,20 +5,12 @@ public abstract class Mode {
     public Mode(String algorithm){
         this.algorithm = algorithm;
     }
-    public Mode(){
-        this.algorithm = "DES";
-    }
 
     public byte[] XORBytes(byte[] arr1, byte[] arr2) {
         byte[] out = new byte[arr1.length];
         for (int i = 0 ; i < arr1.length ; i++) {
             out[i] = (byte)(arr1[i] ^ arr2[i]);
         }
-        System.out.println("AFTER XOR");
-        for (byte z: out){
-            System.out.print(z+",");
-        }
-        System.out.println("/");
         return out;
     }
     public abstract ArrayList<byte[]> encrypt(byte[] plainText, byte[] key, byte[] IV) throws Exception;
