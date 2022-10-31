@@ -10,16 +10,11 @@ public class CBC extends Mode{
         DES des = new DES();
         des.init(key, this.algorithm);
         ArrayList<byte[]> results = new ArrayList<byte[]>();
-        byte[] block = new byte[8];
+        byte[] block;
         int offset=0;
         while(offset<plainText.length){
             block=Arrays.copyOfRange(plainText, offset, offset+8);
-            byte[] encryptedBlock = des.encrypt(XORBytes(block, IV));//byte[] encryptedBlock = des.encrypt(XORBytes(block, IV), offset);
-//            for (int i=0; i<encryptedBlock.length;i++){
-//                System.out.println(encryptedBlock[i]);
-//                if (encryptedBlock[i] < 0) encryptedBlock[i] = (byte) (encryptedBlock[i]+256);
-//                System.out.println(encryptedBlock);
-//            }
+            byte[] encryptedBlock = des.encrypt(XORBytes(block, IV));
             for (byte b: encryptedBlock) {
                 System.out.print(b+",");
             }
@@ -34,15 +29,8 @@ public class CBC extends Mode{
         DES des = new DES();
         cipherArrList.add(0, IV);
         des.init(key, this.algorithm);
-        System.out.println("Cipher Arr List elemanları:");
-        for (byte[] asd: cipherArrList){
-            for (byte z: asd){
-                System.out.print(z+",");
-            }
-            System.out.print("/");
-        }
-        byte[] Ci = new byte[8];
-        byte[] block = new byte[8];
+        byte[] Ci;
+        byte[] block;
         ArrayList<byte[]> results = new ArrayList<byte[]>();
         for (int i=cipherArrList.size()-1; i>=1; i--){
             Ci = cipherArrList.get(i);

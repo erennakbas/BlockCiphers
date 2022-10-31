@@ -35,16 +35,13 @@ public class OFB extends Mode{
     public ArrayList<byte[]> encrypt(byte[] plainText, byte[] key, byte[] IV) throws Exception {
         this.preEncrypt(plainText, key, IV);
         ArrayList<byte[]> results = new ArrayList<byte[]>();
-        byte[] block = new byte[8];
+        byte[] block;
         int offset=0;
         int counter=0;
         while(offset<plainText.length){
             block= Arrays.copyOfRange(plainText, offset, offset+8);
             byte[] encryptedBlock=preEncryptedBlocks.get(counter);
             byte[] finalEncryptedBlock = XORBytes(encryptedBlock, block);
-            for (byte b: finalEncryptedBlock) {
-                System.out.print(b+",");
-            }
             results.add(finalEncryptedBlock);
             offset+=8;
             counter+=1;
@@ -56,24 +53,13 @@ public class OFB extends Mode{
         this.preEncrypt(cipherArrList, key, IV);
         DES des = new DES();
         des.init(key, this.algorithm);
-        System.out.println("Cipher Arr List elemanları:");
-        for (byte[] asd: cipherArrList){
-            for (byte z: asd){
-                System.out.print(z+",");
-            }
-            System.out.print("/");
-        }
-        byte[] Ci = new byte[8];
-        byte[] block = new byte[8];
+        byte[] Ci;
+        byte[] block;
         ArrayList<byte[]> results = new ArrayList<byte[]>();
 
         for (int i=cipherArrList.size()-1; i>=0; i--){
             Ci = cipherArrList.get(i);
             block = preEncryptedBlocks.get(i);
-            for (byte z: block){
-                System.out.print(z+",");
-            }
-            System.out.println("////");
             byte[] decryptedPlainBlock= XORBytes(block, Ci);
             results.add(0,decryptedPlainBlock);
         }
