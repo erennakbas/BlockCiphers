@@ -52,7 +52,7 @@ public class OFB extends Mode{
         return results;
     }
     @Override
-    public String decrypt(ArrayList<byte[]> cipherArrList, byte[] key,byte[] IV) throws Exception{
+    public ArrayList<byte[]> decrypt(ArrayList<byte[]> cipherArrList, byte[] key,byte[] IV) throws Exception{
         this.preEncrypt(cipherArrList, key, IV);
         DES des = new DES();
         des.init(key, this.algorithm);
@@ -65,7 +65,7 @@ public class OFB extends Mode{
         }
         byte[] Ci = new byte[8];
         byte[] block = new byte[8];
-        ArrayList<String> results = new ArrayList<String>();
+        ArrayList<byte[]> results = new ArrayList<byte[]>();
 
         for (int i=cipherArrList.size()-1; i>=0; i--){
             Ci = cipherArrList.get(i);
@@ -74,9 +74,9 @@ public class OFB extends Mode{
                 System.out.print(z+",");
             }
             System.out.println("////");
-            String decryptedPlainBlock= des.encode(XORBytes(block, Ci));
+            byte[] decryptedPlainBlock= XORBytes(block, Ci);
             results.add(0,decryptedPlainBlock);
         }
-        return String.join("", results);
+        return results;
     }
 }

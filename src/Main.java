@@ -3,10 +3,10 @@ public class Main {
     public static void main(String[] args) {
         try {
             IOHandler IOHandler = new IOHandler("input.txt", "output.txt", "myLogger.log", "keyFile.txt");
-            String enOrDecrypt = "DEC";
+            String enOrDecrypt = "ENC";
             String encryptionType = "DES";
             if (encryptionType.equals("3DES")) encryptionType="TripleDES";
-            String encryptionMode = "CTR";
+            String encryptionMode = "CBC";
             Mode mode;
             switch (encryptionMode) {
                 case "CBC":
@@ -25,16 +25,17 @@ public class Main {
                     mode = new CBC(encryptionType);
             }
 
+
             if (enOrDecrypt.equals("DEC")){
                 ArrayList<byte[]> encryptedBlocks = IOHandler.readCipherText();
-                String plaintext = mode.decrypt(encryptedBlocks, IOHandler.getKey(), IOHandler.getIV());
-                IOHandler.writeOutputFile(plaintext);
+                ArrayList<byte[]> plainBlocks= mode.decrypt(encryptedBlocks, IOHandler.getKey(), IOHandler.getIV());
+                IOHandler.writeDecrypted(plainBlocks);
             }
             else if (enOrDecrypt.equals("TEST")){
                 byte[] plaintextByBytes = IOHandler.readPlaintext();
                 ArrayList<byte[]> encryptedBlocks = mode.encrypt(plaintextByBytes, IOHandler.getKey(), IOHandler.getIV());
-                String plaintext = mode.decrypt(encryptedBlocks, IOHandler.getKey(), IOHandler.getIV());
-                System.out.println(plaintext);
+                ArrayList<byte[]> plainBlocks = mode.decrypt(encryptedBlocks, IOHandler.getKey(), IOHandler.getIV());
+                System.out.println(plainBlocks);
             }
             else{
                 byte[] plaintextByBytes = IOHandler.readPlaintext();

@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
@@ -46,27 +47,19 @@ public class IOHandler {
         flogger.write(msg.getBytes());
     }
     public byte[] readPlaintext() throws IOException{
-        return Files.readAllBytes(inputPath);
+        return Files.readAllBytes(this.inputPath);
     }
     public ArrayList<byte[]> readCipherText() throws IOException{
         String string = Files.readString(this.inputPath);
-        char[] chars = string.toCharArray();
-        byte[] bytes = new byte[chars.length];
-        int x=0;
-        System.out.println("Saçmalık");
-        for (x=0; x<chars.length; x++){
-            bytes[x] = (byte) chars[x];
-            System.out.print(bytes[x]+",");
-        }
-        System.out.println();
+        byte[] bytes = Base64.getDecoder().decode(string);
         ArrayList<byte[]> cipherBlocks = new ArrayList<byte[]>();
         byte[] block = new byte[8];
         int k=0;
-        for (int i=0; i<string.length(); i+=8){
+        for (int i=0; i<bytes.length; i+=8){
             k=0;
             block = new byte[8];
             for (int j=i; j<i+8; j++){
-                if (j == string.length()) break;
+                if (j == bytes.length) break;
                 block[k] = bytes[j];
                 System.out.print(block[k]+",");
 //                if (block[k]>=65408) {
@@ -90,21 +83,50 @@ public class IOHandler {
     }
     public void writeOutputFile(ArrayList<byte[]> encryptedBlocks ) throws IOException{
         System.out.println("OUTPUT DOSYASINA YAZDIĞIM DEĞERLER");
-        for (byte[] block:encryptedBlocks) {
-            StringBuilder s = new StringBuilder();
-            for (byte b: block) {
-//                System.out.print(b+",");
-                s.append((char)b);
+        byte[] bytes = new byte[8*encryptedBlocks.size()];
+        int i=0;
+        for (int j=0; j<encryptedBlocks.size(); j++){
+            byte[] block = encryptedBlocks.get(j);
+            for (byte by: block){
+                System.out.print(by+",");
+                if (j == encryptedBlocks.size() -1 && by==0) break;
+                bytes[i] =by;
+                i++;
             }
-//            System.out.print("/");
-//            fout.write(new String(block, StandardCharsets.UTF_8));
-            fout.write(s.toString());
         }
+        System.out.println();
+        bytes = Arrays.copyOfRange(bytes,0,i);
+        System.out.println();
+        for (byte b: bytes){
+            System.out.print(b+",");
+        }
+        fout.write(Base64.getEncoder().encodeToString(bytes));
         }
 
     public void writeOutputFile(String decryptedPlaintext) throws IOException{
         System.out.println(decryptedPlaintext);
         fout.write(decryptedPlaintext);
+    }
+    public void writeDecrypted(ArrayList<byte[]> decryptedBlocks ) throws IOException{
+        System.out.println("OUTPUT DOSYASINA YAZDIĞIM DEĞERLER");
+        byte[] bytes = new byte[8*decryptedBlocks.size()];
+        int i=0;
+        for (int j=0; j<decryptedBlocks.size(); j++){
+            byte[] block = decryptedBlocks.get(j);
+            for (byte by: block){
+                System.out.print(by+",");
+                if (j == decryptedBlocks.size() -1 && by==0) break;
+                bytes[i] =by;
+                i++;
+            }
+        }
+        System.out.println();
+        bytes = Arrays.copyOfRange(bytes,0,i);
+        System.out.println();
+        for (byte b: bytes){
+            System.out.print(b+",");
+        }
+        fout.write(new String(bytes));
     }
     //                for (byte x: b) System.out.print(x+",");
 //                for (byte x: b) System.out.print((char)x);

@@ -25,7 +25,7 @@ public class CFB extends Mode{
         }
         return results;
     }
-    public String decrypt(ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception{
+    public ArrayList<byte[]> decrypt(ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception{
         DES des = new DES();
         des.init(key, this.algorithm);
         cipherArrList.add(0, IV);
@@ -39,13 +39,13 @@ public class CFB extends Mode{
         }
         byte[] Ci;
         byte[] block;
-        ArrayList<String> results = new ArrayList<String>();
+        ArrayList<byte[]> results = new ArrayList<byte[]>();
         for (int i=cipherArrList.size()-1; i>=1; i--){
             Ci = cipherArrList.get(i);
             block = des.encrypt(cipherArrList.get(i-1));
-            String decryptedPlainBlock= des.encode(XORBytes(block, Ci));
+            byte[] decryptedPlainBlock= XORBytes(block, Ci);
             results.add(0,decryptedPlainBlock);
         }
-        return String.join("", results);
+        return results;
     }
 }

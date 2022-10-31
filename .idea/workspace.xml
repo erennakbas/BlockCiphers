@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="467f7aa0-2bed-4457-ad27-5fa7cb0374e3" name="Changes" comment="">
+    <list default="true" id="467f7aa0-2bed-4457-ad27-5fa7cb0374e3" name="Changes" comment="3DES Implemented.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CBC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CFB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CFB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CTR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CTR.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DES.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DES.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IOHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IOHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Mode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Mode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OFB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OFB.java" afterDir="false" />
@@ -25,6 +26,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -36,11 +42,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ahmet\Desktop\assignment\DES" />
@@ -64,6 +70,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -84,7 +91,7 @@
       <workItem from="1667076661993" duration="3571000" />
       <workItem from="1667120992791" duration="9222000" />
       <workItem from="1667130499334" duration="9924000" />
-      <workItem from="1667210002741" duration="2908000" />
+      <workItem from="1667210002741" duration="6015000" />
     </task>
     <task id="LOCAL-00001" summary="Filehandler">
       <created>1666970497224</created>
@@ -156,7 +163,21 @@
       <option name="project" value="LOCAL" />
       <updated>1667150372541</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="some refactoring of the code">
+      <created>1667213463655</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1667213463655</updated>
+    </task>
+    <task id="LOCAL-00012" summary="3DES Implemented.">
+      <created>1667217477816</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1667217477816</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,7 +198,9 @@
     <MESSAGE value="Filehandler" />
     <MESSAGE value="CBC Son hal" />
     <MESSAGE value="ofb done" />
-    <option name="LAST_COMMIT_MESSAGE" value="ofb done" />
+    <MESSAGE value="some refactoring of the code" />
+    <MESSAGE value="3DES Implemented." />
+    <option name="LAST_COMMIT_MESSAGE" value="3DES Implemented." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -185,10 +208,6 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="javax.crypto.IllegalBlockSizeException" package="javax.crypto" />
           <option name="timeStamp" value="1" />
-        </breakpoint>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
-          <option name="timeStamp" value="4" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>

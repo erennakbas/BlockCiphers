@@ -61,7 +61,7 @@ public class CTR extends Mode{
         return results;
     }
     @Override
-    public String decrypt(ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception{
+    public ArrayList<byte[]> decrypt(ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception{
         DES des = new DES();
         des.init(key, this.algorithm);
 //        System.out.println("Cipher Arr List elemanları:");
@@ -73,13 +73,13 @@ public class CTR extends Mode{
 //        }
         byte[] Ci = new byte[8];
         byte[] block = new byte[8];
-        ArrayList<String> results = new ArrayList<String>();
+        ArrayList<byte[]> results = new ArrayList<byte[]>();
         for (int i=0; i<cipherArrList.size(); i++){
             Ci = cipherArrList.get(i);
             block = preEncryptedBlocks.get(i);
-            String decryptedPlainBlock= des.encode(XORBytes(block, Ci));
+            byte[] decryptedPlainBlock= XORBytes(block, Ci);
             results.add(decryptedPlainBlock);
         }
-        return String.join("", results);
+        return results;
     }
 }

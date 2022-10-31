@@ -56,7 +56,7 @@ public class DES {
 //            System.out.print(i +",");
 //        }
 //        System.out.println("----");
-        return Base64.getMimeEncoder().encodeToString(data);
+        return Base64.getEncoder().encodeToString(data);
 //        return builder.toString();
     }
 
