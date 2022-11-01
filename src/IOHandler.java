@@ -24,6 +24,8 @@ public class IOHandler {
 
         }catch(Exception e){System.out.println(e);}
     }
+    //Method for reading key file.
+    //We used first 8 characters of key, iv and nonce values to get an 64 bit meaningful block.
     private void readKeyFile() throws IOException{
         int i;
         StringBuilder s = new StringBuilder();
@@ -41,9 +43,11 @@ public class IOHandler {
     public void writeLogFile(String msg) throws IOException {
         flogger.write(msg.getBytes());
     }
+    //Method for reading plainText to get an utilizable arraylist for encrypting
     public byte[] readPlaintext() throws IOException{
         return Files.readAllBytes(this.inputPath);
     }
+    //Method for reading cipherText to get an utilizable arraylist for decrypting
     public ArrayList<byte[]> readCipherText() throws IOException{
         String string = String.join("",Files.readAllLines(inputPath));
         byte[] bytes = Base64.getDecoder().decode(string);
@@ -70,6 +74,7 @@ public class IOHandler {
         byte[] bytes = unpadBlockList(decryptedBlocks);
         fout.write(new String(bytes));
     }
+    //helper method to clear null values.
     private byte[] unpadBlockList(ArrayList<byte[]> blocks){
             byte[] bytes = new byte[8*blocks.size()];
             int i=0;
@@ -88,6 +93,7 @@ public class IOHandler {
         fout.close();
         flogger.close();
     }
+    //getters
     public byte[] getKey() {
         return key;
     }

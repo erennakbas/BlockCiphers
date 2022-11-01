@@ -2,10 +2,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class OFB extends Mode{
+    //Xi array
     public ArrayList<byte[]> preEncryptedBlocks;
     public OFB(String algorithm){
         super(algorithm);
     }
+    //Method for getting Xi array when encrypting
     public void preEncrypt(byte[] input, byte[] key, byte[] IV)throws Exception{
         preEncryptedBlocks= new ArrayList<byte[]>();
         DES des = new DES();
@@ -18,6 +20,7 @@ public class OFB extends Mode{
             offset+=8;
         }
     }
+    //Method for getting Xi array when decrypting
     public void preEncrypt(ArrayList<byte[]> input, byte[] key, byte[] IV)throws Exception{
         preEncryptedBlocks= new ArrayList<byte[]>();
         DES des = new DES();
@@ -30,7 +33,7 @@ public class OFB extends Mode{
             counter+=1;
         }
     }
-
+    //◦ Encryption: X0=IV, Xi= Ek[Xi-1] , Ci = Pi ⊕ Xi
     @Override
     public ArrayList<byte[]> encrypt(byte[] plainText, byte[] key, byte[] IV) throws Exception {
         this.preEncrypt(plainText, key, IV);
@@ -48,6 +51,7 @@ public class OFB extends Mode{
         }
         return results;
     }
+    //◦ Decryption: X0=IV, Xi= Ek[Xi-1] , Pi = Ci ⊕ Xi
     @Override
     public ArrayList<byte[]> decrypt(ArrayList<byte[]> cipherArrList, byte[] key,byte[] IV) throws Exception{
         this.preEncrypt(cipherArrList, key, IV);
