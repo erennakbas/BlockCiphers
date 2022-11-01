@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="467f7aa0-2bed-4457-ad27-5fa7cb0374e3" name="Changes" comment="Kod temize çekildi, testler yapıldı.">
+    <list default="true" id="467f7aa0-2bed-4457-ad27-5fa7cb0374e3" name="Changes" comment="Argümanları aldık. loggerı yazdık.">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CBC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CFB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CFB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CTR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CTR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DES.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DES.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IOHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IOHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileCipher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Mode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Mode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OFB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/OFB.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +44,12 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -47,7 +57,7 @@
       <recent name="C:\Users\ahmet\Desktop\assignment\DES" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.FileCipher">
     <configuration name="DES" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DES" />
       <module name="DES" />
@@ -55,8 +65,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+    <configuration name="FileCipher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="FileCipher" />
       <module name="DES" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -64,8 +74,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.FileCipher" />
+        <item itemvalue="Application.FileCipher" />
       </list>
     </recent_temporary>
   </component>
@@ -87,6 +97,7 @@
       <workItem from="1667120992791" duration="9222000" />
       <workItem from="1667130499334" duration="9924000" />
       <workItem from="1667210002741" duration="6015000" />
+      <workItem from="1667297427338" duration="3804000" />
     </task>
     <task id="LOCAL-00001" summary="Filehandler">
       <created>1666970497224</created>
@@ -186,7 +197,28 @@
       <option name="project" value="LOCAL" />
       <updated>1667249485821</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Argümanları aldık. loggerı yazdık.">
+      <created>1667250658004</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1667250658004</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Argümanları aldık. loggerı yazdık.">
+      <created>1667257204970</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1667257204970</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Argümanları aldık. loggerı yazdık.">
+      <created>1667258102856</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1667258102856</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,7 +243,8 @@
     <MESSAGE value="3DES Implemented." />
     <MESSAGE value="Base64 yapıldı. Test edilecek, log yazılacak." />
     <MESSAGE value="Kod temize çekildi, testler yapıldı." />
-    <option name="LAST_COMMIT_MESSAGE" value="Kod temize çekildi, testler yapıldı." />
+    <MESSAGE value="Argümanları aldık. loggerı yazdık." />
+    <option name="LAST_COMMIT_MESSAGE" value="Argümanları aldık. loggerı yazdık." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

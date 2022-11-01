@@ -2,8 +2,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CTR extends Mode{
+    //ArrayList to store encrypted version of counter+1 , counter+2 ,counter+3... (Xi)
     public ArrayList<byte[]> preEncryptedBlocks = new ArrayList<>();
 
+    //Constructor for encrypting the counter values.
     public CTR(String algorithm, byte[] plainText, byte[] key, byte[] counter) throws Exception{
         super(algorithm);
         DES des = new DES();
@@ -19,6 +21,7 @@ public class CTR extends Mode{
             offset+=8;
         }
     }
+    //helper method to convert byte array to long so that we can increment it.
     public long byteToLong(byte[] IV){
         long lng = ((long) IV[7] << 56)
                 | ((long) IV[6] & 0xff) << 48
@@ -30,6 +33,7 @@ public class CTR extends Mode{
                 | ((long) IV[0] & 0xff);
         return lng;
     }
+    //helper method to convert long to byte array.
     public byte[] longToByte(long lng){
         byte[] bl = new byte[] {
                 (byte) lng,
@@ -42,6 +46,7 @@ public class CTR extends Mode{
                 (byte) (lng >> 56)};
         return bl;
     }
+    // Ci = Pi ⊕ Xi
     @Override
     public ArrayList<byte[]> encrypt(byte[] plainText, byte[] key, byte[] IV) throws Exception {
         DES des = new DES();
@@ -53,6 +58,7 @@ public class CTR extends Mode{
         }
         return results;
     }
+    // Pi = Ci ⊕ Xi
     @Override
     public ArrayList<byte[]> decrypt(ArrayList<byte[]> cipherArrList, byte[] key, byte[] IV) throws Exception{
         DES des = new DES();
